@@ -13,7 +13,8 @@
         ["id" => 2, "nome" => "Estudar PHP", "previsao" => "2025-04-03"],
         ["id" => 3, "nome" => "Revisar código", "previsao" => "2025-04-05"],
         ["id" => 4, "nome" => "Enviar relatório", "previsao" => "2025-04-06"],
-        ["id" => 5, "nome" => "Marcar reunião", "previsao" => "2025-04-07"]
+        ["id" => 5, "nome" => "Marcar reunião", "previsao" => "2025-04-07"],
+        ["id" => 6, "nome" => "Acrescentar tarefa", "previsao" => "2025-05-27"]
     ];
 
     // Iteração da lista

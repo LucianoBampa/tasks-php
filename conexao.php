@@ -1,5 +1,5 @@
 <?php
-// Caminho para o banco de dados SQLite (pode ser relativo ou absoluto)
+
 $host = "localhost";
 $dbname = "meu_banco";
 $username = "root";
