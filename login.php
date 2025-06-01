@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Aqui comparação direta de texto para senha sem hash
-        if ($usuario && $senha === $usuario['senha']) {
+        if ($usuario && password_verify($senha, $usuario['senha'])) {
             $_SESSION['usuario'] = [
                 'id' => $usuario['id'],
                 'nome' => $usuario['nome'],

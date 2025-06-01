@@ -1,5 +1,5 @@
 <?php
-include('conexao.php'); // Conexão com o banco
+include('conexao.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST['nome'] ?? '';
@@ -7,12 +7,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $senha = $_POST['senha'] ?? '';
 
     if ($nome && $email && $senha) {
+        // Criptografar a senha de forma segura
+        $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+
         try {
             $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, senha) VALUES (:nome, :email, :senha)");
             $stmt->execute([
                 ':nome' => $nome,
                 ':email' => $email,
-                ':senha' => $senha // ← senha em texto puro (temporariamente)
+                ':senha' => $senhaHash
             ]);
 
             header("Location: login.php?msg=cadastro_sucesso");

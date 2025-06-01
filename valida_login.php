@@ -5,19 +5,28 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require_once("conexao.php");
 
-$email = $_POST['email'];
-$senha = $_POST['senha'];
+$email = $_POST['email'] ?? '';
+$senha = $_POST['senha'] ?? '';
 
-$sql = "SELECT * FROM usuarios WHERE email = '$email' LIMIT 1";
-$result = mysqli_query($conexao, $sql);
-$usuario = mysqli_fetch_assoc($result);
+if ($email && $senha) {
+    $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = :email LIMIT 1");
+    $stmt->execute([':email' => $email]);
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if ($usuario && password_verify($senha, $usuario['senha'])) {
-    $_SESSION['usuario'] = $usuario['nome'];
-    header("Location: index.php");
-    exit;
+    if ($usuario && password_verify($senha, $usuario['senha'])) {
+        $_SESSION['usuario'] = [
+            'id' => $usuario['id'],
+            'nome' => $usuario['nome'],
+            'email' => $usuario['email']
+        ];
+        header("Location: index.php");
+        exit;
+    } else {
+        header("Location: login.php?erro=1");
+        exit;
+    }
 } else {
-    header("Location: login.php?erro=1");
+    header("Location: login.php?erro=2");
     exit;
 }
 ?>

@@ -23,7 +23,7 @@ try {
                 <td><?= $usuario['id'] ?></td>
                 <td><?= htmlspecialchars($usuario['nome']) ?></td>
                 <td><?= htmlspecialchars($usuario['email']) ?></td>
-                <td><?= htmlspecialchars($usuario['senha']) ?></td>
+                <!-- <td><?= htmlspecialchars($usuario['senha']) ?></td> -->
                 <td>
                     <a href="editar_usuario.php?id=<?= $usuario['id'] ?>">Editar</a> |
                     <a href="deletar_usuario.php?id=<?= $usuario['id'] ?>" onclick="return confirm('Tem certeza?')">Excluir</a>
